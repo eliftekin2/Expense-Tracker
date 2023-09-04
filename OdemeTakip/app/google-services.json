@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "760344534026",
+    "project_id": "odemetakipsis",
+    "storage_bucket": "odemetakipsis.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:760344534026:android:46c418d94c4304998d13f3",
+        "android_client_info": {
+          "package_name": "com.eliftekin.odemetakip"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "760344534026-1fp2mhd20iacs0mi66gjguhmbahq6h5n.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDLMxcxn40cAMNC-A8dV_0Wl4PkU2e5gG8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "760344534026-1fp2mhd20iacs0mi66gjguhmbahq6h5n.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
