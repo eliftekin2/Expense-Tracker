@@ -146,6 +146,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void toplam() {
 
+        //bugünün tarihini alır
         Date bugun = new Date();
         Long timestampbugun = bugun.getTime();
 
@@ -163,6 +164,7 @@ public class MainActivity extends AppCompatActivity {
                     long toplam30_60 = 0;
                     long toplamgenel = 0;
 
+                    //veritabanından vade tarihi verilerini çeker
                     for (DocumentSnapshot snapshot : value.getDocuments()){
                         com.google.firebase.Timestamp vadeTarihi = (com.google.firebase.Timestamp) snapshot.getData().get("Vade Tarihi");
 
@@ -170,9 +172,9 @@ public class MainActivity extends AppCompatActivity {
                             Long timestampVadeTarihi = vadeTarihi.toDate().getTime();
                             long gunFarki = (timestampVadeTarihi - timestampbugun) / (24 * 60 * 60 * 1000);
 
-                            long tutar = snapshot.getLong("Tutar"); // "Tutar" alanını alın
+                            long tutar = snapshot.getLong("Tutar"); // "Tutar" alanını alır
 
-                            // Tarih aralığına göre belgeyi sınıflandırın ve toplamı güncelleyin
+                            // Tarih aralığına göre belgeyi sınıflandırıp toplamı günceller
                             if (gunFarki <= 15) {
                                 toplam15 += tutar;
                             } else if (gunFarki <= 30 && gunFarki > 15) {
@@ -231,6 +233,7 @@ public class MainActivity extends AppCompatActivity {
                 String VadeTarihi = vadetarihi.getText().toString();
                 String Acıklama = aciklama.getText().toString();
 
+                //alanlar boşsa uyarı mesajı verir
                 if(Tarih.isEmpty() || VadeTarihi.isEmpty() || tutar.getText().toString().isEmpty() || Acıklama.isEmpty()){
                     Toast.makeText(context, "Lütfen Tüm Alanları Doldurun.", Toast.LENGTH_SHORT).show();
                 }
@@ -245,6 +248,7 @@ public class MainActivity extends AppCompatActivity {
                     data.put("Tutar", Tutar);
                     data.put("Durum", false);
 
+                    //hashmap'de toplanan verileri veritabanına aktarır
                     firestore.collection("data").add(data).addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
                         @Override
                         public void onSuccess(DocumentReference documentReference) {
@@ -262,6 +266,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    //kaydedilmiş verileri alan fonksiyon
     private void odenmis_getData() {
         firestore.collection("ödenmişler").addSnapshotListener(new EventListener<QuerySnapshot>() {
             @Override
@@ -284,7 +289,9 @@ public class MainActivity extends AppCompatActivity {
 
                         String id = snapshot.getId();
 
+                        //alınan verileri data sınıfına aktarır
                         data alınanveri = new data(aciklama, tarih, vadeTarihi, tutar, durum, id);
+                        //data sınıfı nesnesindeki veriler arrayliste aktarılır.
                         odenmisler_datalist.add(alınanveri);
                     }
                     odenmisler_rvA.notifyDataSetChanged();
@@ -348,6 +355,7 @@ public class MainActivity extends AppCompatActivity {
                         }
 
                         else {
+                            //gün ve ayı gg/aa şeklinde formatlar
                             String yenigun = String.format("%02d", gun);
                             String yeniay = String.format("%02d", ay + 1);
 
